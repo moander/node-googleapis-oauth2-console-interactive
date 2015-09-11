@@ -1,0 +1,26 @@
+{
+  "name": "googleapis-oauth2-console-interactive",
+  "version": "0.1.0-rc.4",
+  "description": "Ask user to visit consent page and to enter code into console",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moander/node-googleapis-oauth2-console-interactive.git"
+  },
+  "keywords": [
+    "oauth2"
+  ],
+  "author": "Morten Andersen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/moander/node-googleapis-oauth2-console-interactive/issues"
+  },
+  "homepage": "https://github.com/moander/node-googleapis-oauth2-console-interactive#readme",
+  "dependencies": {
+    "async": "^1.4.2",
+    "google-auth-library": "^0.9.6"
+  }
+}
