@@ -5,25 +5,30 @@ var https = require('https');
 
 var OAuth2Client = google.auth.OAuth2;
 
-module.exports = offline_oauth2;
+module.exports = function (opts, callback) {
+  opts = opts || {};
 
-/* example:
-
-offline_oauth2({
-  clientId: '',
-  clientSecret: '',
-  scope: 'https://www.googleapis.com/auth/userinfo.email'
-}, function(err, authClient) {
-
-});
-
-*/
+  if (!opts.noAppDefault) {
+    google.auth.getApplicationDefault(function (err, result) {
+      if (err) {
+        offline_oauth2(opts, callback);
+      } else {
+        if (result.createScopedRequired && result.createScopedRequired()) {
+          result = result.createScoped(opts.scope);
+        }
+        callback(null, result);
+        return;
+      }
+    });
+    return;
+  }
+  offline_oauth2(opts, callback);
+};
 
 function offline_oauth2(opts, callback) {
-  opts = opts || {};
   opts.access_type = opts.access_type || 'offline';
   opts.redirectUri = opts.redirectUri || 'urn:ietf:wg:oauth:2.0:oob';
-  
+
   var client = new OAuth2Client(opts.clientId, opts.clientSecret, opts.redirectUri, opts.opt_opts);
   //google.urlshortener('v1');
   async.waterfall([
@@ -73,7 +78,7 @@ function offline_oauth2(opts, callback) {
     function (tokens) {
       client.setCredentials(tokens);
       arguments[arguments.length - 1](null, client);
-    },   
-    
+    },
+
   ], callback);
 };
