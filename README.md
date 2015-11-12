@@ -13,5 +13,5 @@ function(err, authClient) {
 ## Installation
 
 ```shell
-$ npm install node-googleapis-oauth2-console-interactive --save
+$ npm install googleapis-oauth2-console-interactive --save
 ```
